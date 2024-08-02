@@ -55,14 +55,17 @@ python manage.py runserver
 ### API Endpoints
   - #### 1. Register a New User
     Endpoint : `register/`
+    
     Method : `POST `
     
   - #### 2. Login
     Endpoint : `login/`
+    
     Method : `POST`
     
   - #### 3. Get All Users
     Endpoint : `userlist`
+    
     Method : `GET `
 
 ### Testing the API
