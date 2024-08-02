@@ -74,7 +74,7 @@ You can use tools like Postman or Curl to test the endpoints. Here are some exam
 ```bash
   curl -X POST http://127.0.0.1:8000/register/ \
   -H "Content-Type: application/json" \
-  -d '{"username": "testuser", "password": "testpassword"}'
+  -d '{"username": "testuser","email":"test@gmail.com", "password": "testpassword"}'
 ```
 
 #### Login
