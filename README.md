@@ -34,7 +34,7 @@ pip install django djangorestframework
   - add `'rest_framework.authtoken'` in DRF_authentication/settings.py to use Token table for token authentication and import it by `from rest_framework.authtoken.models import Token`
 
 - ### Serializer
-  Defines the `RegisterSerializer` and `LoginSerializer` with custom validation for registration.
+  - Defines the `RegisterSerializer` and `LoginSerializer` with custom validation for registration.
 
 ### 4. Run Migrations
 ```bash
