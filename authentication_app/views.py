@@ -5,7 +5,6 @@ from .serializers import RegisterSerializer, LoginSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
@@ -29,9 +28,6 @@ class RegisterAPI(APIView):
         
         
 class LoginAPI(APIView):
-    
-    permission_classes = [IsAuthenticated]
-    
     def post(self,request):
         _data = request.data
         serializer = LoginSerializer(data = _data)
@@ -54,14 +50,11 @@ class LoginAPI(APIView):
             },status=status.HTTP_201_CREATED)
         
 
-class ReadOnly(BasePermission):
-    def has_permission(self, request, view):
-        return request.method in SAFE_METHODS        
-
-
 class UserListAPI(APIView):
-    permission_classes = [IsAuthenticated|ReadOnly]
     def get(self, request):
         queryset =  User.objects.all()
+        
         username_serilizer = queryset.values_list('username', flat=True)
+        
         return Response({'username':list(username_serilizer)})
+    
