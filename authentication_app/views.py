@@ -8,6 +8,8 @@ from rest_framework import status
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.authentication import TokenAuthentication
 
 
 
@@ -28,6 +30,8 @@ class RegisterAPI(APIView):
         
         
 class LoginAPI(APIView):
+    permission_classes = [AllowAny] # can be accessed by anyone
+    
     def post(self,request):
         _data = request.data
         serializer = LoginSerializer(data = _data)
@@ -51,10 +55,14 @@ class LoginAPI(APIView):
         
 
 class UserListAPI(APIView):
-    def get(self, request):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    def post(self, request):
         queryset =  User.objects.all()
         
         username_serilizer = queryset.values_list('username', flat=True)
         
         return Response({'username':list(username_serilizer)})
     
+    # def post(self, request):
+    #     return Response("This is a post method rfom UserList")
